@@ -46,19 +46,18 @@ PORT=
 JWT_SECRET=
 ```
 
-<p>6. Start the Frontend : bash Copy code</p>
+<p>6. Start the Frontend : </p>
 
 ```
 npm run dev
 ```
 
-<p>7. Start the Backend : bash Copy code</p>
+<p>7. Start the Backend : </p>
 
 ```
 npm start
 ```
 
-<h2>🍰 Contribution Guidelines:</h2>
 
   
   
