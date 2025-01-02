@@ -2,11 +2,16 @@
 
 <p id="description">The Task Management Application is a full-stack web application designed to streamline task allocation tracking and management across teams. It supports three distinct user roles: Admin Manager and Regular User each with specific permissions and functionalities tailored to their responsibilities. This project is designed with scalability and role-based access control in mind ensuring that every user interacts with the system according to their role. The application serves as an efficient tool for managing day-to-day tasks enhancing productivity and promoting collaboration within organizations.</p>
 
-<h2>🚀 Demo</h2>
+## 🚀 Demo
 
+### Frontend Live URL:
 [https://task-management-system-livid.vercel.app/](https://task-management-system-livid.vercel.app/)
 
-  
+### Backend Live URL:
+[https://backend.syedtalhahussain.com/test](https://backend.syedtalhahussain.com/test)
+
+I have deployed the frontend on Vercel and the backend on AWS Elastic Beanstalk with SSL activation, and I created a subdomain for the backend URL.
+
   
 <h2>🧐 Features</h2>
 
@@ -70,4 +75,3 @@ Technologies used in the project:
 *   MongoDB
 *   ExpressJs
 
-<h2>💖Like my work?</h2>
