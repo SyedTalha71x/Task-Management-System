@@ -149,20 +149,18 @@ export const editUser = async (req, res) => {
         const { name, email, password, role, assignedUsers } = req.body;
         const adminId = req.user._id;
         const admin = await User.findById(adminId);
+
         if (admin.role !== 'admin') {
             return FailureResponse(res, "Only admins can edit users", null, 403);
         }
+
         const userToEdit = await User.findById(id);
         if (!userToEdit) {
             return FailureResponse(res, "User not found", null, 404);
         }
 
-        console.log(userToEdit.role);
-        
-
-        if (userToEdit.role !== 'user' && userToEdit.role !== 'manager') {
-            return FailureResponse(res, "You can only edit users with 'user' or 'manager' roles", null, 400);
-        }
+        const oldRole = userToEdit.role;
+        const isRoleChanged = oldRole !== role;
 
         if (name) userToEdit.name = name;
         if (email) userToEdit.email = email;
@@ -177,29 +175,58 @@ export const editUser = async (req, res) => {
 
         await userToEdit.save();
 
-        const regularUser = await RegularUser.findOne({ regularUserId: userToEdit._id });
-        if (regularUser) {
-            regularUser.name = userToEdit.name;
-            regularUser.email = userToEdit.email;
-            regularUser.password = userToEdit.password;
-            regularUser.role = userToEdit.role;
-            regularUser.assignedUsers = userToEdit.assignedUsers || [];
-            await regularUser.save();
+        // If the role is changed from user to manager
+        if (isRoleChanged && oldRole === 'user' && role === 'manager') {
+            // it will delete the record from regularusers table and add the record in  manager table
+            await RegularUser.findOneAndDelete({ regularUserId: userToEdit._id });
+
+            const managerData = new Manager({
+                managerId: userToEdit._id,
+                name: userToEdit.name,
+                email: userToEdit.email,
+                password: userToEdit.password,
+                assignedUsers: userToEdit.assignedUsers || [],
+            });
+            await managerData.save();
         }
 
-        if (userToEdit.role === 'manager') {
-            let managerData = await Manager.findOne({ managerId: userToEdit._id });
-
-            if (managerData) {
-                managerData.name = userToEdit.name;
-                managerData.email = userToEdit.email;
-                managerData.password = userToEdit.password;
-                managerData.assignedUsers = assignedUsers || [];
-                await managerData.save();
-            } 
-        } else if (role === 'user') {
-            // If the role is user, delete any corresponding manager data
+        // If the role is changed from manager to user
+        if (isRoleChanged && oldRole === 'manager' && role === 'user') {
+            // it will delete the record from manager table and add the record in regular users table
             await Manager.findOneAndDelete({ managerId: userToEdit._id });
+
+            const regularUserData = new RegularUser({
+                regularUserId: userToEdit._id,
+                name: userToEdit.name,
+                email: userToEdit.email,
+                password: userToEdit.password,
+                role: userToEdit.role,
+                assignedUsers: userToEdit.assignedUsers || [],
+            });
+            await regularUserData.save();
+        }
+
+        if (!isRoleChanged) {
+            if (role === 'user') {
+                const regularUser = await RegularUser.findOne({ regularUserId: userToEdit._id });
+                if (regularUser) {
+                    regularUser.name = userToEdit.name;
+                    regularUser.email = userToEdit.email;
+                    regularUser.password = userToEdit.password;
+                    regularUser.assignedUsers = userToEdit.assignedUsers || [];
+                    await regularUser.save();
+                }
+            } else if (role === 'manager') {
+                // Update the Manager table
+                const managerData = await Manager.findOne({ managerId: userToEdit._id });
+                if (managerData) {
+                    managerData.name = userToEdit.name;
+                    managerData.email = userToEdit.email;
+                    managerData.password = userToEdit.password;
+                    managerData.assignedUsers = userToEdit.assignedUsers || [];
+                    await managerData.save();
+                }
+            }
         }
 
         return SuccessResponse(res, "User updated successfully", { updatedUser: userToEdit }, 200);
@@ -208,6 +235,8 @@ export const editUser = async (req, res) => {
         return FailureResponse(res, 'Internal Server Error', null, 500);
     }
 };
+
+
 export const viewAllUsers = async (req, res) => {
     try {
         const userId = req.user._id;
