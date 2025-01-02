@@ -47,7 +47,7 @@ git clone https://github.com/SyedTalha71x/Task-Management-System.git
 npm install
 ```
 
-<p>3. Configure environment variables for your database and authentication in the .env file.</p>
+<p>3. Configure environment variables for your database and authentication in the server .env file.</p>
 
 ```
 DATABASE_URL=
