@@ -13,10 +13,16 @@
 I have deployed the frontend on Vercel and the backend on AWS Elastic Beanstalk with SSL activation, and I created a subdomain for the backend URL.
 
 
-<p>4. If you want to run the backend from a local development server, add the following key in the client `.env` file:</p>
+<p>4. If you want to run the backend from a local development server, add the following key in the client `.env` file and change condition in Context folder in react to :</p>
 
 ```
 VITE_BACKEND_API_URL='your backend server url '
+```
+
+<p>5. and change condition in Context folder in react to :</p>
+
+```
+const BASE_URL = import.meta.env.VITE_PRODUCTION_API_URL   to   const BASE_URL = import.meta.env.VITE_BACKEND_API_URL
 ```
 
 
