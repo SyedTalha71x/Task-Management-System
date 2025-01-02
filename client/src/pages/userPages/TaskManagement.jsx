@@ -164,6 +164,7 @@ const TaskManagement = () => {
         dataSource={tasks}
         rowKey="_id"
         pagination={false}
+        scroll={{x: 1000}}
       />
       <Modal
         title="Edit Task"

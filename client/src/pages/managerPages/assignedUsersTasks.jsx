@@ -168,6 +168,8 @@ const AssignedUsersTasks = () => {
       <h2 className="text-lg font-bold mb-4">Assigned User Tasks</h2>
       <Table
         dataSource={tasks}
+        scroll={{x: 1000}}
+
         columns={columns}
         rowKey="_id"
         loading={loading}

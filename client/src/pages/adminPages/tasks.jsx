@@ -172,6 +172,8 @@ const UserDetails = () => {
         rowKey="_id"
         loading={loading}
         pagination={{ pageSize: 5 }}
+        scroll={{x: 1000}}
+
       />
 
       <Modal

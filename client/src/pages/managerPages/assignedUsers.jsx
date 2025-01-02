@@ -63,6 +63,8 @@ const AssignedUsersTable = () => {
         columns={columns}
         dataSource={assignedUsers}
         rowKey="_id"
+        scroll={{x: 1000}}
+
         pagination={false}
         onRow={(record) => ({
             onClick: () => handleRowClick(record),

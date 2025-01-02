@@ -125,6 +125,7 @@ const FilterTasks = () => {
         columns={columns}
         loading={loading}
         bordered
+        scroll={{x: 1000}}
       />
     </div>
   );

@@ -168,7 +168,7 @@ const Users = () => {
         loading={loading}
         rowKey="_id"
         pagination={{ pageSize: 10 }}
-        scroll={{ x: 1000 }}
+        scroll={{x: 1000}}
         style={{ cursor: 'pointer' }}
         onRow={(record) => ({
           onClick: () => handleRowClick(record),
