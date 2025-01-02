@@ -130,7 +130,7 @@ const Users = () => {
       key: 'actions',
       render: (_, record) => (
         <>
-          <Button
+          {/* <Button
             icon={<EditOutlined />}
             onClick={(e) => {
               e.stopPropagation(); // Prevent row click from triggering navigation
@@ -139,11 +139,11 @@ const Users = () => {
             style={{ marginRight: 8 }}
           >
             Edit
-          </Button>
+          </Button> */}
           <Button
             icon={<DeleteOutlined />}
             onClick={(e) => {
-              e.stopPropagation(); // Prevent row click from triggering navigation
+              e.stopPropagation(); 
               handleDelete(record);
             }}
             danger
@@ -156,7 +156,6 @@ const Users = () => {
   ];
 
   const handleRowClick = (record) => {
-    // Only navigate when clicking on row directly (not the Edit/Delete buttons)
     navigate(`/admin/dashboard/tasks/${record._id}`);
   };
 
