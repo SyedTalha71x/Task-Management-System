@@ -46,6 +46,13 @@ const Sidebar = () => {
       icon: <SiSimpleanalytics />,
       href: "/admin/dashboard/assign-user-to-manager",
     },
+
+    {
+      name: "Sorting and Filtering",
+      icon: <SiSimpleanalytics />,
+      href: "/admin/dashboard/sort-filter-tasks",
+    },
+    
     { name: "Create Task", icon: <FaTasks />, href: "/user/dashboard/create-task" },
     { name: "Tasks", icon: <FaTasks />, href: "/user/dashboard/tasks" },
     { name: "Filter Tasks", icon: <FaTasks />, href: "/user/dashboard/filter-tasks" },
@@ -54,15 +61,17 @@ const Sidebar = () => {
     { name: "Manager Tasks", icon: <FaTasks />, href: "/manager/dashboard/manager-tasks" },
     { name: "Create a Task", icon: <FaTasks />, href: "/manager/dashboard/create-a-task" },
     { name: "Assigned Users", icon: <FaTasks />, href: "/manager/dashboard/assign-users" },
+    { name: "Sort Tasks", icon: <FaTasks />, href: "/manager/dashboard/sort-tasks" },
+
 
   ];
 
   const filteredMenuItems = menuItems.filter(item => {
     if (role === "admin") {
-      return !['Create a Task', 'Manager Tasks', 'Create Task', 'Assigned Users', 'Tasks', 'Filter Tasks'].includes(item.name); 
+      return !['Create a Task', 'Manager Tasks', 'Create Task', 'Assigned Users', 'Tasks', 'Filter Tasks', 'Sort Tasks'].includes(item.name); 
     }
     if (role === "manager") {
-      return ['Create a Task', 'Manager Tasks', 'Assigned Users', 'Filter Tasks'].includes(item.name);
+      return ['Create a Task', 'Manager Tasks', 'Assigned Users' ,'Sort Tasks'].includes(item.name);
     }
     if (role === "user") {
       return ['Create Task', 'Tasks', 'Filter Tasks'].includes(item.name);

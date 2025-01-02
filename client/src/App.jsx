@@ -18,18 +18,19 @@ import AssignUsersToManager from "./pages/adminPages/AssignUsersToManager";
 import Tasks from "./pages/adminPages/tasks";
 import AdminTasks from "./pages/adminPages/adminTasks";
 import AdminCreateTask from './pages/adminPages/createTask'
+import AdminFilterTask from './pages/adminPages/filterTask'
 
 // User pages
 import CreateTask from "./pages/userPages/createTask";
 import TaskManagement from "./pages/userPages/TaskManagement";
 import FilterTask from './pages/userPages/filterTasks'
 
-
 // Manager pages 
 import ManagerCreateTask from './pages/managerPages/createTask'
 import ManagerTaskManagement from './pages/managerPages/Tasks'
 import AsignedUsers from "./pages/managerPages/assignedUsers";
 import AssignedUsersTasks from "./pages/managerPages/assignedUsersTasks";
+import ManagerFilterTask from './pages/managerPages/filterTask'
 
 function App() {
   return (
@@ -54,6 +55,8 @@ function App() {
           />
           <Route path="tasks/:id" element={<Tasks />} />
           <Route path="create-task" element={<AdminCreateTask />} />
+          <Route path="sort-filter-tasks" element={<AdminFilterTask />} />
+
 
         </Route>
 
@@ -64,6 +67,8 @@ function App() {
         <Route path="manager-tasks" element={<ManagerTaskManagement />} />
         <Route path="assign-users" element={<AsignedUsers />} />
         <Route path="assign-users-tasks/:id" element={<AssignedUsersTasks />} />
+        <Route path="sort-tasks" element={<ManagerFilterTask />} />
+
 
         </Route>
 
