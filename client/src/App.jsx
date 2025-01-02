@@ -16,10 +16,13 @@ import AddUser from "./pages/adminPages/addUser";
 import Users from "./pages/adminPages/users";
 import AssignUsersToManager from "./pages/adminPages/AssignUsersToManager";
 import Tasks from "./pages/adminPages/tasks";
+import AdminTasks from "./pages/adminPages/adminTasks";
+import AdminCreateTask from './pages/adminPages/createTask'
 
 // User pages
 import CreateTask from "./pages/userPages/createTask";
 import TaskManagement from "./pages/userPages/TaskManagement";
+import FilterTask from './pages/userPages/filterTasks'
 
 
 // Manager pages 
@@ -39,8 +42,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
 
         {/* Dashboards Redirection based on users roles  */}
+
         {/* Admin Routes  */}
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
+        <Route path="admin-tasks" element={<AdminTasks />} />
           <Route path="add-user" element={<AddUser />} />
           <Route path="users" element={<Users />} />
           <Route
@@ -48,7 +53,10 @@ function App() {
             element={<AssignUsersToManager />}
           />
           <Route path="tasks/:id" element={<Tasks />} />
+          <Route path="create-task" element={<AdminCreateTask />} />
+
         </Route>
+
 
         {/* Manager Routes */}
         <Route path="/manager/dashboard" element={<ManagerDashboard />}>
@@ -63,6 +71,8 @@ function App() {
         <Route path="/user/dashboard" element={<UserDashboard />}>
           <Route path="create-task" element={<CreateTask />} />
           <Route path="tasks" element={<TaskManagement />} />
+          <Route path="filter-tasks" element={<FilterTask />} />
+
         </Route>
 
 

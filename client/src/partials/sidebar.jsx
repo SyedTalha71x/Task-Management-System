@@ -16,9 +16,8 @@ const Sidebar = () => {
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    // Get the user's role from localStorage (or context if preferred)
     const userRole = localStorage.getItem("role");
-    setRole(userRole); // Update the role state
+    setRole(userRole);
   }, []);
 
   const toggleSidebar = () => {
@@ -33,6 +32,9 @@ const Sidebar = () => {
   };
 
   const menuItems = [
+    { name: "Create New Task", icon: <FaTasks />, href: "/admin/dashboard/create-task" },
+    { name: "Admin Tasks", icon: <FaTasks />, href: "/admin/dashboard/admin-tasks" },
+
     { name: "Add a User", icon: <FaUsers />, href: "/admin/dashboard/add-user" },
     {
       name: "Users",
@@ -46,32 +48,24 @@ const Sidebar = () => {
     },
     { name: "Create Task", icon: <FaTasks />, href: "/user/dashboard/create-task" },
     { name: "Tasks", icon: <FaTasks />, href: "/user/dashboard/tasks" },
+    { name: "Filter Tasks", icon: <FaTasks />, href: "/user/dashboard/filter-tasks" },
+
 
     { name: "Manager Tasks", icon: <FaTasks />, href: "/manager/dashboard/manager-tasks" },
     { name: "Create a Task", icon: <FaTasks />, href: "/manager/dashboard/create-a-task" },
     { name: "Assigned Users", icon: <FaTasks />, href: "/manager/dashboard/assign-users" },
 
-
-
-
-    // { name: "Roles and Permissions", icon: <IoMdSettings />,
-    //   subItems: [
-    //     { name: "Users", href: "/dashboard/courses/create" },
-    //     { name: "Roles to users", href: "/dashboard/courses/delete" },
-    //     { name: "Permission to roles", href: "/dashboard/courses/delete" },
-    //   ],
-    // },
   ];
 
   const filteredMenuItems = menuItems.filter(item => {
     if (role === "admin") {
-      return !['Create a Task', 'Manager Tasks', 'Create Task', 'Assigned Users', 'Tasks'].includes(item.name); 
+      return !['Create a Task', 'Manager Tasks', 'Create Task', 'Assigned Users', 'Tasks', 'Filter Tasks'].includes(item.name); 
     }
     if (role === "manager") {
-      return ['Create a Task', 'Manager Tasks', 'Assigned Users'].includes(item.name);
+      return ['Create a Task', 'Manager Tasks', 'Assigned Users', 'Filter Tasks'].includes(item.name);
     }
     if (role === "user") {
-      return ['Create Task', 'Tasks'].includes(item.name);
+      return ['Create Task', 'Tasks', 'Filter Tasks'].includes(item.name);
     }
     return false;
   });
