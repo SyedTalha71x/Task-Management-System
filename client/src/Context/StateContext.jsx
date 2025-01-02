@@ -5,7 +5,7 @@ const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
   const [userId, setuserId] = useState('')
-  const BASE_URL = "http://task-system-backend.us-east-1.elasticbeanstalk.com";
+  const BASE_URL = "https://backend.syedtalhahussain.com";
 
   return (
     <StateContext.Provider value={{ BASE_URL, userId, setuserId }}>
