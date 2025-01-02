@@ -34,7 +34,7 @@ const Page = () => {
   return (
     <header className="bg-gray-200 shadow-2xl p-2">
       <div className="">
-        <div className="flex justify-end gap-2 items-center p-2">
+        <div className="flex justify-between gap-2 items-center p-2">
           <div className="lg:text-xl md:text-xl sm:text-sm text-sm font-bold text-gray-800">
             {welcomeText} 
           </div>

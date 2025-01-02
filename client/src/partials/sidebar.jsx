@@ -34,36 +34,17 @@ const Sidebar = () => {
   const menuItems = [
     { name: "Create New Task", icon: <FaTasks />, href: "/admin/dashboard/create-task" },
     { name: "Admin Tasks", icon: <FaTasks />, href: "/admin/dashboard/admin-tasks" },
-
     { name: "Add a User", icon: <FaUsers />, href: "/admin/dashboard/add-user" },
-    {
-      name: "Users",
-      icon: <PiBooksDuotone />,
-      href: "/admin/dashboard/users" 
-    },
-    {
-      name: "Assign Users to Manager",
-      icon: <SiSimpleanalytics />,
-      href: "/admin/dashboard/assign-user-to-manager",
-    },
-
-    {
-      name: "Sorting and Filtering",
-      icon: <SiSimpleanalytics />,
-      href: "/admin/dashboard/sort-filter-tasks",
-    },
-    
+    { name: "Users", icon: <PiBooksDuotone />, href: "/admin/dashboard/users" },
+    { name: "Assign Users to Manager", icon: <SiSimpleanalytics />, href: "/admin/dashboard/assign-user-to-manager" },
+    { name: "Sorting and Filtering", icon: <SiSimpleanalytics />, href: "/admin/dashboard/sort-filter-tasks" },
     { name: "Create Task", icon: <FaTasks />, href: "/user/dashboard/create-task" },
     { name: "Tasks", icon: <FaTasks />, href: "/user/dashboard/tasks" },
     { name: "Filter Tasks", icon: <FaTasks />, href: "/user/dashboard/filter-tasks" },
-
-
     { name: "Manager Tasks", icon: <FaTasks />, href: "/manager/dashboard/manager-tasks" },
     { name: "Create a Task", icon: <FaTasks />, href: "/manager/dashboard/create-a-task" },
     { name: "Assigned Users", icon: <FaTasks />, href: "/manager/dashboard/assign-users" },
     { name: "Sort Tasks", icon: <FaTasks />, href: "/manager/dashboard/sort-tasks" },
-
-
   ];
 
   const filteredMenuItems = menuItems.filter(item => {
@@ -78,33 +59,26 @@ const Sidebar = () => {
     }
     return false;
   });
-  
-  
 
   return (
     <>
+      {/* Hamburger button moved to bottom left */}
       <button
         onClick={toggleSidebar}
-        className="md:hidden fixed top-2 left-2 z-50 bg-gray-800 text-white p-2 rounded-md shadow-lg"
+        className="md:hidden fixed bottom-4 left-4 z-50 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-colors duration-200"
       >
-        {!isOpen && <IoMenu className="text-2xl" />}
+        {!isOpen ? <IoMenu className="text-2xl" /> : <IoClose className="text-2xl" />}
       </button>
 
+      {/* Sidebar with adjusted positioning */}
       <div
         className={`
-         fixed inset-y-0 left-0 z-40 transform duration-500 ease-in-out
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0 md:static md:inset-0
-      `}
+          fixed inset-y-0 left-0 z-40 transform duration-500 ease-in-out
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
+          md:translate-x-0 md:static md:inset-0
+        `}
       >
         <aside className="bg-slate-100 shadow-xl text-black w-64 h-full p-4">
-          <button
-            onClick={toggleSidebar}
-            className="absolute top-2 right-2 text-white overflow-hidden bg-gray-700 p-2 rounded-full hover:bg-gray-600 md:hidden"
-          >
-            <IoClose className="text-2xl" />
-          </button>
-
           <nav className="mt-12">
             <ul className="space-y-2">
               {filteredMenuItems.map((item) =>
@@ -112,15 +86,13 @@ const Sidebar = () => {
                   <li key={item.name}>
                     <div
                       className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-700 hover:text-white cursor-pointer transition-colors duration-200"
-                      onClick={() => {
-                        setDropDown(item.name);
-                      }}
+                      onClick={() => setDropDown(item.name)}
                     >
                       <div className="flex items-center gap-3">
                         <span className="text-lg">{item.icon}</span>
                         <span className="text-sm">{item.name}</span>
                       </div>
-                      <span className="text-sm ">
+                      <span className="text-sm">
                         {dropdownStates[item.name] ? <IoIosArrowUp /> : <IoIosArrowDown />}
                       </span>
                     </div>
@@ -163,6 +135,7 @@ const Sidebar = () => {
         </aside>
       </div>
 
+      {/* Overlay */}
       {isOpen && (
         <div
           onClick={toggleSidebar}
